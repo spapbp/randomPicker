@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Enter a dude'
+                hintText: 'Enter a ff'
               )
             )
           ],
