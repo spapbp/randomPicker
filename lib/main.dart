@@ -7,7 +7,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,13 +25,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String task = "";
+  List<String> tasks = [];
+
   Widget _buildPopupDialog(BuildContext context) {
     return AlertDialog(
       title: const Text('Popup'),
       content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[Text("Hello")]),
+          children: <Widget>[Text(task)]),
       actions: <Widget>[
         TextButton(
           onPressed: () {
@@ -54,7 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextField(
+            Column(
+              children: <Widget>[Text("WWERWER")],
+            ),
+            TextField(
+                onChanged: (text) {
+                  task = text;
+                },
                 decoration: InputDecoration(
                     border: OutlineInputBorder(), hintText: 'Enter a Task')),
             ElevatedButton(
