@@ -56,8 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              children: <Widget>[Text("WWERWER")],
+            ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: tasks.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                    height: 50, child: Center(child: Text('$tasks[index]}')));
+              },
             ),
             TextField(
                 onChanged: (text) {
@@ -67,11 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     border: OutlineInputBorder(), hintText: 'Enter a Task')),
             ElevatedButton(
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        _buildPopupDialog(context),
-                  );
+                  // showDialog(
+                  //   context: context,
+                  //   builder: (BuildContext context) =>
+                  //       _buildPopupDialog(context),
+                  // );
+                  tasks.add(task);
                 },
                 child: const Text("Enabled"))
           ],
