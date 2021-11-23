@@ -55,15 +55,16 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ListView.builder(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
               padding: const EdgeInsets.all(8),
               itemCount: tasks.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                     height: 50, child: Center(child: Text('$tasks[index]}')));
               },
-            ),
+            )),
             TextField(
                 onChanged: (text) {
                   task = text;
