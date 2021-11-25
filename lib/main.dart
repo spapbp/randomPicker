@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String task = "";
-  List<String> tasks = [];
+  List<String> tasks = ["sdfsdf", "wwww"];
 
   Widget _buildPopupDialog(BuildContext context) {
     return AlertDialog(
@@ -61,8 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8),
               itemCount: tasks.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                    height: 50, child: Center(child: Text('$tasks[index]}')));
+                return new Text(tasks[index]);
               },
             )),
             TextField(
@@ -73,14 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     border: OutlineInputBorder(), hintText: 'Enter a Task')),
             ElevatedButton(
                 onPressed: () {
-                  // showDialog(
-                  //   context: context,
-                  //   builder: (BuildContext context) =>
-                  //       _buildPopupDialog(context),
-                  // );
                   tasks.add(task);
+                  setState(() {});
                 },
-                child: const Text("Enabled"))
+                child: const Text("Add"))
           ],
         ),
       ),
