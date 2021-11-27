@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String task = "";
-  List<String> tasks = ["sdfsdf", "wwww"];
+  List<String> tasks = [];
 
   Widget _buildPopupDialog(BuildContext context) {
     return AlertDialog(
@@ -61,7 +61,22 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8),
               itemCount: tasks.length,
               itemBuilder: (BuildContext context, int index) {
-                return new Text(tasks[index]);
+                final item = tasks[index];
+                return Dismissible(
+                  key: Key(item),
+                  onDismissed: (direction) {
+                    setState(() {
+                      tasks.removeAt(index);
+                    });
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text('$item removed')));
+                  },
+                  background: Container(color: Colors.red),
+                  child: ListTile(
+                    title: Text(item),
+                  ),
+                );
+                //return new Text(tasks[index]);
               },
             )),
             TextField(
