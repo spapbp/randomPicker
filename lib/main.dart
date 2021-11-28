@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:swipe_listview_selection/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,12 +24,12 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-String task = "";
-List<ListItem<String>> tasks = [];
-List<String> picks = [];
-
 class _MyHomePageState extends State<MyHomePage> {
-  
+  String task = "";
+  List<String> tasks = [];
+  List<String> picks = ["s", "b", "a"];
+  int selectedPick = 0;
+
   Widget _buildPopupDialog(BuildContext context) {
     return AlertDialog(
       title: const Text('Popup'),
@@ -95,25 +94,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text("Add")),
             Expanded(
-              child: ListView.builder(
-                itemCount: picks.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final selected = picks[index];
-                  return 
-                }),),)
+                child: ListView.builder(
+                    itemCount: picks.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                          title: Text(picks[index]),
+                          tileColor: selectedPick == index
+                              ? Colors.lightBlueAccent
+                              : null,
+                          thumbnail: 
+                          onTap: () {
+                            setState(() {
+                              selectedPick = index;
+                            });
+                          });
+                    }))
           ],
         ),
       ),
     );
   }
-}
-
-Widget _getPicksItemTile(BuildContext context, int index){
-  return Container(
-    margin: EdgeInsets.symmetric(vertical: 4),
-    color : picks[index].isSelected ? Colors.red[100]: Colors.white,
-    child: ListTile(
-      title: Text(picks[index].data),
-      ),
-  );
 }
