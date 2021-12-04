@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String task = "";
   List<String> tasks = [];
-  List<String> picks = ["s", "b", "a"];
+  List<String> picks = ["s", "c", "a", "a", "a", "a", "a", "a"];
   int selectedPick = 0;
 
   Widget _buildPopupDialog(BuildContext context) {
@@ -100,9 +100,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       return ListTile(
                           title: Text(picks[index]),
                           tileColor: selectedPick == index
-                              ? Colors.lightBlueAccent
+                              ? Colors
+                                  .lightBlueAccent //highlight shows when scrolling up
                               : null,
-                          thumbnail: 
                           onTap: () {
                             setState(() {
                               selectedPick = index;
