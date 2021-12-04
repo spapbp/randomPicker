@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String task = "";
   List<String> tasks = [];
-  List<String> picks = ["s", "c", "a", "a", "a", "a", "a", "a"];
+  List<String> picks = ["a", "b", "c", "d", "e", "f", "g", "h"];
   int selectedPick = 0;
 
   Widget _buildPopupDialog(BuildContext context) {
@@ -97,18 +98,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView.builder(
                     itemCount: picks.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                          title: Text(picks[index]),
-                          tileColor: selectedPick == index
-                              ? Colors
-                                  .lightBlueAccent //highlight shows when scrolling up
-                              : null,
-                          onTap: () {
-                            setState(() {
-                              selectedPick = index;
-                            });
-                          });
-                    }))
+                      return Material(
+                          child: ListTile(
+                              title: Text(picks[index]),
+                              tileColor: selectedPick == index
+                                  ? Colors.lightBlueAccent
+                                  : null,
+                              onTap: () {
+                                setState(() {
+                                  selectedPick = index;
+                                });
+                              }));
+                    })),
+            ElevatedButton(
+                onPressed: () {
+                  var rng = new Random();
+                  selectedPick = rng.nextInt(picks.length);
+                  setState(() {});
+                },
+                child: const Text("Random Pick"))
           ],
         ),
       ),
