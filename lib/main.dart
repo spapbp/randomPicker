@@ -26,28 +26,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String task = "";
+  final task = TextEditingController();
   List<String> tasks = [];
   List<String> picks = ["a", "b", "c", "d", "e", "f", "g", "h"];
   int selectedPick = 0;
-
-  Widget _buildPopupDialog(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Popup'),
-      content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[Text(task)]),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Close'),
-        ),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
               itemBuilder: (BuildContext context, int index) {
                 final item = tasks[index];
                 return Dismissible(
-                  key: Key(item),
+                  key: UniqueKey(),
                   onDismissed: (direction) {
                     setState(() {
                       tasks.removeAt(index);
@@ -79,19 +61,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     title: Text(item),
                   ),
                 );
-                //return new Text(tasks[index]);
               },
             )),
             TextField(
-                onChanged: (text) {
-                  task = text;
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Enter a Task')),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: 'Enter a Task'),
+              controller: task,
+            ),
             ElevatedButton(
                 onPressed: () {
-                  tasks.add(task);
-                  setState(() {});
+                  if (task.text != "") {
+                    tasks.add(task.text);
+                    task.clear();
+                    setState(() {});
+                  }
                 },
                 child: const Text("Add")),
             Expanded(
